@@ -1,0 +1,15 @@
+ESP32_SD_ShinonomeFNT	KEYWORD1
+SD_Shinonome_Init3F	KEYWORD2
+SD_Shinonome_Init2F	KEYWORD2
+SD_Shinonome_Close3F	KEYWORD2
+SD_Shinonome_Close2F	KEYWORD2
+StrDirect_ShinoFNT_readALL	KEYWORD2
+SjisShinonomeFNTread_ALL	KEYWORD2
+SjisToShinonome16FontRead	KEYWORD2
+SjisToShinonome16FontRead2	KEYWORD2
+SjisToShinonome16FontRead_ALL	KEYWORD2
+Scroller_RtoL	KEYWORD2
+SjisToShinonomeFNTadrs	KEYWORD2
+SD_Flash_ShinonomeFNTread_FHN	KEYWORD2
+SD_Flash_ShinonomeFNTread_Harf_FHN	KEYWORD2
+Sjis_inc_FntRead	KEYWORD2
