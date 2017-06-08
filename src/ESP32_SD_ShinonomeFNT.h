@@ -1,6 +1,6 @@
 /*
   ESP32_SD_ShinonomeFNT.h - Arduino core for the ESP32 Library.
-  Beta version 1.0
+  Beta version 1.1
   This is micro SD card library for reading Shinonome font.  
   
 The MIT License (MIT)
@@ -48,6 +48,7 @@ public:
   void SD_Shinonome_Close3F();
   void SD_Shinonome_Close2F();
   uint16_t StrDirect_ShinoFNT_readALL(String str, uint8_t font_buf[][16]);
+  uint16_t StrDirect_ShinoFNT_readALL2F(File UtoS, String str, uint8_t font_buf[][16]);
   uint16_t SjisShinonomeFNTread_ALL(String str, uint8_t* sj_code, uint8_t font_buf[][16]);
   uint8_t SjisToShinonome16FontRead(File f1, File f2, uint8_t Direction, int16_t Angle, uint8_t jisH, uint8_t jisL, uint8_t buf1[16], uint8_t buf2[16]);
   uint8_t SjisToShinonome16FontRead2(uint8_t jisH, uint8_t jisL, uint8_t buf1[16], uint8_t buf2[16]);
@@ -61,10 +62,16 @@ public:
 private:
   uint8_t _cs;
   uint32_t _SD_freq;
-  File _UtoS;
   File _SinoZ;
   File _SinoH;
   ESP32_SD_UTF8toSJIS _u8ts;
+
+  uint8_t _Sino_font_buf[16][16]; //東雲（しののめ）フォントバッファ
+  uint8_t _SnnmDotOut[16][16];
+  uint8_t _Next_buf[16][16];
+  uint8_t _font_buf[2][16];
+  uint8_t _Orign_buf[16];
+  uint8_t _ZENorHalf = 0;
 };
 
 #endif

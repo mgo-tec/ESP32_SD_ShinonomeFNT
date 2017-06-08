@@ -1,6 +1,6 @@
 /*
   ESP32_SD_ShinonomeFNT.cpp - Arduino core for the ESP32 Library.
-  Beta version 1.0
+  Beta version 1.1
   This is micro SD card library for reading Shinonome font.  
   
 The MIT License (MIT)
@@ -36,12 +36,7 @@ ESP32_SD_ShinonomeFNT::ESP32_SD_ShinonomeFNT(uint8_t Cs, uint32_t Sd_freq)
 : _cs(Cs), _SD_freq(Sd_freq)
 {}
 
-uint8_t _Sino_font_buf[16][16]; //東雲（しののめ）フォントバッファ
-uint8_t _SnnmDotOut[16][16];
-uint8_t _Next_buf[16][16];
-uint8_t _font_buf[2][16];
-uint8_t _Orign_buf[16];
-uint8_t _ZENorHalf = 0;
+File _UtoS;
 
 //*********東雲フォントライブラリ初期化3ファイル*************************************************************
 void ESP32_SD_ShinonomeFNT::SD_Shinonome_Init3F(const char* UTF8SJIS_file, const char* Shino_Half_Font_file, const char* Shino_Zen_Font_file)
@@ -143,7 +138,19 @@ uint16_t ESP32_SD_ShinonomeFNT::StrDirect_ShinoFNT_readALL(String str, uint8_t f
   ESP32_SD_ShinonomeFNT::SjisToShinonome16FontRead_ALL(_SinoZ, _SinoH, 0, 0, sj_txt, sj_length, font_buf);
   return sj_length;
 }
-
+//*******************東雲フォント全変換 UTF8toShis変換ファイルハンドル外部読み込み*************************
+uint16_t ESP32_SD_ShinonomeFNT::StrDirect_ShinoFNT_readALL2F(File UtoS, String str, uint8_t font_buf[][16])
+{
+  uint8_t sj_txt[str.length()];
+  uint16_t sj_length;
+  
+  SPI.setFrequency(_SD_freq); //他のデバイスの速度やモードが異なるため、毎回呼び出す。
+  SPI.setDataMode(SPI_MODE0);
+  
+  _u8ts.UTF8_to_SJIS_str_cnv(UtoS, str, sj_txt, &sj_length);
+  ESP32_SD_ShinonomeFNT::SjisToShinonome16FontRead_ALL(_SinoZ, _SinoH, 0, 0, sj_txt, sj_length, font_buf);
+  return sj_length;
+}
 //*******************東雲フォント全変換（Shift_JISコード返りあり）*************************
 uint16_t ESP32_SD_ShinonomeFNT::SjisShinonomeFNTread_ALL(String str, uint8_t* sj_code, uint8_t font_buf[][16])
 {
