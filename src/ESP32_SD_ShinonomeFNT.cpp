@@ -1,6 +1,6 @@
 /*
   ESP32_SD_ShinonomeFNT.cpp - Arduino core for the ESP32 Library.
-  Beta version 1.1
+  Beta version 1.2
   This is micro SD card library for reading Shinonome font.  
   
 The MIT License (MIT)
@@ -39,9 +39,11 @@ ESP32_SD_ShinonomeFNT::ESP32_SD_ShinonomeFNT(uint8_t Cs, uint32_t Sd_freq)
 File _UtoS;
 
 //*********東雲フォントライブラリ初期化3ファイル*************************************************************
-void ESP32_SD_ShinonomeFNT::SD_Shinonome_Init3F(const char* UTF8SJIS_file, const char* Shino_Half_Font_file, const char* Shino_Zen_Font_file)
+bool ESP32_SD_ShinonomeFNT::SD_Shinonome_Init3F(const char* UTF8SJIS_file, const char* Shino_Half_Font_file, const char* Shino_Zen_Font_file)
 {
   Serial.begin(115200);
+  _gF1 = Shino_Half_Font_file;
+  _gF2 = Shino_Zen_Font_file;
   
   SD.begin(_cs, SPI, _SD_freq, "/sd");
   
@@ -50,7 +52,7 @@ void ESP32_SD_ShinonomeFNT::SD_Shinonome_Init3F(const char* UTF8SJIS_file, const
   if (!_UtoS) {
     Serial.print(UTF8SJIS_file);
     Serial.println(" File not found");
-    return;
+    return false;
   }else{
     Serial.print(UTF8SJIS_file);
     Serial.println(" File read OK!");
@@ -59,7 +61,7 @@ void ESP32_SD_ShinonomeFNT::SD_Shinonome_Init3F(const char* UTF8SJIS_file, const
   if (!_SinoH) {
     Serial.print(Shino_Half_Font_file);
     Serial.print(" File not found");
-    return;
+    return false;
   }else{
     Serial.print(Shino_Half_Font_file);
     Serial.println(" File read OK!");
@@ -68,16 +70,16 @@ void ESP32_SD_ShinonomeFNT::SD_Shinonome_Init3F(const char* UTF8SJIS_file, const
   if (!_SinoZ) {
     Serial.print(Shino_Zen_Font_file);
     Serial.print(" File not found");
-    return;
+    return false;
   }else{
     Serial.print(Shino_Zen_Font_file);
     Serial.println(" File read OK!");
   }
-  //SPI.begin();  
-
+  
+  return true;
 }
 //********東雲フォントライブラリ初期化　２ファイル*************************************************************
-void ESP32_SD_ShinonomeFNT::SD_Shinonome_Init2F(const char* Shino_Half_Font_file, const char* Shino_Zen_Font_file)
+bool ESP32_SD_ShinonomeFNT::SD_Shinonome_Init2F(const char* Shino_Half_Font_file, const char* Shino_Zen_Font_file)
 {
   Serial.begin(115200);
   
@@ -87,7 +89,7 @@ void ESP32_SD_ShinonomeFNT::SD_Shinonome_Init2F(const char* Shino_Half_Font_file
   if (!_SinoH) {
     Serial.print(Shino_Half_Font_file);
     Serial.print(" File not found");
-    return;
+    return false;
   }else{
     Serial.print(Shino_Half_Font_file);
     Serial.println(" File read OK!");
@@ -96,13 +98,13 @@ void ESP32_SD_ShinonomeFNT::SD_Shinonome_Init2F(const char* Shino_Half_Font_file
   if (!_SinoZ) {
     Serial.print(Shino_Zen_Font_file);
     Serial.print(" File not found");
-    return;
+    return false;
   }else{
     Serial.print(Shino_Zen_Font_file);
     Serial.println(" File read OK!");
   }
-  //SPI.begin();  
-
+  
+  return true;
 }
 //**************３ファイル　フォントファイルクローズ********************
 void ESP32_SD_ShinonomeFNT::SD_Shinonome_Close3F(){
