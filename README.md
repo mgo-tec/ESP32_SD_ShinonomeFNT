@@ -1,7 +1,7 @@
 # ESP32_SD_ShinonomeFNT
 This is the Arduino core for the ESP32 library for reading Shinonome 16x16 Japanese font.  
   
-Beta ver1.2  
+Beta ver1.21  
   
 これはShift_JISコードからフリーの東雲フォント(16x16)を ESP-WROOM-32( ESP32 )で読み込むためのライブラリです。  
 SPI ( VSPI )接続の micro SD カードからの読み込み専用です。  
@@ -16,6 +16,10 @@ shnmk16.bdf (全角東雲フォント)
 shnm8x16.bdf (半角東雲フォント, ファイル名の'r'をカットしたもの)  
   
 【更新履歴】  
+(1.21)  
+2017/8/1 以降、Arduino core for ESP32 が大幅アップデートされたことに伴い、Serial.beginクラスが２使用できなくなりました。  
+よって、SD_Shinonome_Init3F関数などの Serial.begin関数をコメントアウトしました。  
+  
 (1.2)  
 軽微な修正をしました。  
   
