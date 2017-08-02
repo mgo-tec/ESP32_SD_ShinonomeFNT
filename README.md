@@ -17,7 +17,7 @@ shnm8x16.bdf (半角東雲フォント, ファイル名の'r'をカットした�
   
 【更新履歴】  
 (1.21)  
-2017/8/1 以降、Arduino core for ESP32 が大幅アップデートされたことに伴い、Serial.beginクラスが２使用できなくなりました。  
+2017/8/1 以降、Arduino core for ESP32 が大幅アップデートされたことに伴い、Serial.beginクラスが２重使用できなくなりました。  
 よって、SD_Shinonome_Init3F関数などの Serial.begin関数をコメントアウトしました。  
   
 (1.2)  
