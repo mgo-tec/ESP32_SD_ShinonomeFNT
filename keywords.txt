@@ -14,3 +14,4 @@ SjisToShinonomeFNTadrs	KEYWORD2
 SD_Flash_ShinonomeFNTread_FHN	KEYWORD2
 SD_Flash_ShinonomeFNTread_Harf_FHN	KEYWORD2
 Sjis_inc_FntRead	KEYWORD2
+UTF8toSJIS_convert	KEYWORD2
